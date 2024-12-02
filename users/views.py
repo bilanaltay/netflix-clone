@@ -1,3 +1,4 @@
+from django.urls import reverse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
@@ -60,13 +61,19 @@ class LoginView(APIView):
             if not user.is_active:
                 return Response({"error": "Hesabınız aktif değil"}, status=status.HTTP_403_FORBIDDEN)
 
+            # JWT token oluştur
             refresh = RefreshToken.for_user(user)
+
+            # movie_list endpoint'inin URL'sini al
+            movie_list_url = reverse('movie-list')  # 'movie-list' URL adını kullanıyoruz.
+
             return Response({
                 "message": "Giriş başarılı",
                 "access_token": str(refresh.access_token),
                 "refresh_token": str(refresh),
                 "user_id": user.id,
-                "username": user.username
+                "username": user.username,
+                "redirect_url": movie_list_url  # movie_list URL'sini döndür
             }, status=status.HTTP_200_OK)
         else:
             return Response({"error": "Geçersiz email veya şifre"}, status=status.HTTP_401_UNAUTHORIZED)
