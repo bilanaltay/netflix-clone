@@ -21,7 +21,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # Admin paneline erişim
-    path('', include('movies.urls')),  # Movies uygulamasının URL'lerini dahil et
+    path('movies/', include('movies.urls')),  # Movies uygulamasının URL'lerini dahil et
     path('', include('recommendations.urls')),  # Recommendation app URL'leri
     path('users/', include('users.urls')),  # Users uygulamasının URL'lerini dahil et
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # Refresh token endpoint

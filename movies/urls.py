@@ -2,7 +2,7 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('movies/', movie_list, name='movie-list'),  # Tüm filmleri listeleme
+    path('', movie_list, name='movie-list'),  # Tüm filmleri listeleme
     #Listem için
     path('my-list/', user_movie_list, name='user-movie-list'),  # Kullanıcının film listesi
     path('add-to-list/<int:movie_id>/', add_movie_to_list, name='add-movie-to-list'),  # Film ekleme
